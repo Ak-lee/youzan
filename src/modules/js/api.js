@@ -4,6 +4,7 @@ let  url ={
   topList: '/category/topList',
   subList: '/category/subList',
   rank: '/category/rank',
+  searchList:'/search/list'
 }
 
 // 开发环境和真实上线环境的切换 只需修改下面的host即可
