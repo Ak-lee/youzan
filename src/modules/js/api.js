@@ -1,6 +1,9 @@
 let  url ={
   hotLists: '/index/hotLists',
   banner: '/index/banner',
+  topList: '/category/topList',
+  subList: '/category/subList',
+  rank: '/category/rank',
 }
 
 // 开发环境和真实上线环境的切换 只需修改下面的host即可
