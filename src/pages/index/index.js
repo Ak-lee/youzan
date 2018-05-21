@@ -50,7 +50,7 @@ let app = new Vue({
         this.loading = false
       })
     },
-    getBanner(){
+    getBanner(){          // 轮播图
       axios.get(url.banner).then((res)=>{
         this.bannerLists = res.data.lists;
       })
