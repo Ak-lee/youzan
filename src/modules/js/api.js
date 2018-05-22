@@ -6,7 +6,8 @@ let  url ={
   rank: '/category/rank',
   searchList:'/search/list',
   details:'/goods/details',
-  deal:'/goods/deal'
+  deal:'/goods/deal',
+  addCart:'/cart/add'
 }
 
 // 开发环境和真实上线环境的切换 只需修改下面的host即可

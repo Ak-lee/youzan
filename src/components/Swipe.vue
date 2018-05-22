@@ -36,6 +36,10 @@
 </script>
 
 <style scoped>
+  .swiper-container{
+    width:375px;
+    height:375px;
+  }
   .swiper-slide img{
     height: 100%;
     width: 100%;
