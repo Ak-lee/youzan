@@ -10,7 +10,10 @@ import url from 'js/api.js'
 new Vue({
   el:'.container',
   data:{
-    lists:null
+    lists:null,
+    total:0,
+    editingShop:null,
+    editingShopIndex:-1,
   },
   computed:{
     allSelected: {
@@ -30,6 +33,27 @@ new Vue({
           })
         })
       }
+    },
+    selectLists(){
+      if(this.lists && this.lists.length){
+        let arr = []
+        let total = 0
+        this.lists.forEach(shop=>{
+          shop.goodsList.forEach(good=>{
+            if(good.checked){
+              arr.push(good)
+              total += good.price * good.number
+            }
+          })
+        })
+        this.total = total
+        return arr
+      }else{
+        return []
+      }
+    },
+    removeLists(){
+
     }
   },
   created(){
@@ -42,8 +66,12 @@ new Vue({
           let temp = res.data.cartList
           temp.forEach(shop =>{
             shop.checked = true;
+            shop.removeChecked = false;
+            shop.editing = false;
+            shop.editingMsg = '编辑'
             shop.goodsList.forEach(good=>{
               good.checked = true
+              good.removeChecked = false
             })
           })
           this.lists = temp;
@@ -63,6 +91,18 @@ new Vue({
     },
     selectAll(){
       this.allSelected = !this.allSelected
+    },
+    edit(shop,shopIndex){
+      shop.editing = !shop.editing
+      shop.editingMsg=shop.editing ? '完成':'编辑'
+      this.lists.forEach((item,i)=>{
+        if(shopIndex !== i ){
+          item.editing = false
+          item.editingMsg=shop.editing ? '' : '编辑'
+        }
+      })
+      this.editingShop = shop.editing ? shop : null
+      this.editingShopIndex = shop.editing? shopIndex : -1
     }
   },
   mixins:[mixin]
