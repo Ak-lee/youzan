@@ -163,7 +163,7 @@ new Vue({
       }
     },
     add(good){
-      axios.post(url.addCart,{
+      axios.post(url.cartAdd,{
         id: good.id,
         number: 1
       }).then(res=>{
