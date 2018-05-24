@@ -6,6 +6,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import mixin from 'js/mixin.js'
 import url from 'js/api.js'
+import Velocity from 'velocity-animate'
 
 new Vue({
   el:'.container',
@@ -15,7 +16,7 @@ new Vue({
     editingShop:null,
     editingShopIndex:-1,
     removePopup: false,
-    removeMsg:'确实要删除该商品吗？',
+    removeMsg:'确定要删除该商品吗？',
     removeData:null
   },
   computed:{
@@ -182,16 +183,44 @@ new Vue({
       }
     },
     removeConfirm() {
-      let {shop, shopIndex, good, goodIndex} = this.removeData
-      axios.post(url.cartRemove, {
-        id: good.id
-      }).then(res => {
-        shop.goodsList.splice(goodIndex,1)
-        if(!shop.goodsList.length){
-          this.removeShop(shopIndex)
-        }
-        this.removePopup = false
-      })
+      if(this.removeMsg === '确定要删除该商品吗？'){
+        let {shop,shopIndex,good,goodIndex} = this.removeData
+        fetch(url.cartRemove,{
+          id: good.id
+        }).then(res => {
+          shop.goodsList.splice(goodIndex, 1)
+          if(!shop.goodsList.length) {
+            this.lists.splice(shopIndex, 1)
+            this.removeShop()
+          }
+          this.removePopup  = false
+          // this.$refs[`goods-${shopIndex}-${goodIndex}`][0].style.left = '0px'
+        })
+      }else {
+        let ids = []
+        this.removeLists.forEach(good => {
+          ids.push(good.id)
+        })
+        axios.post(url.cartMremove, {
+          ids
+        }).then(res => {
+          let arr = []
+          this.editingShop.goodsList.forEach(good => {
+            let index = this.removeLists.findIndex(item => {
+              return item.id == good.id
+            })
+            if(index === -1) {    // 若removeLists 中没有这件商品，则把这件商品push到arr中
+              arr.push(good)
+            }
+          })
+          if(arr.length) {
+            this.editingShop.goodsList = arr
+          } else {
+            this.removeShop(this.editingShopIndex)
+          }
+          this.removePopup  = false
+        })
+      }
     },
     remove(shop,shopIndex,good,goodIndex){
       this.removePopup = true
@@ -204,6 +233,26 @@ new Vue({
       this.lists.forEach((shop)=>{
         shop.editing = false
         shop.editingMsg='编辑'
+      })
+    },
+    removeList(){
+      this.removePopup = true
+      this.removeMsg = `确定将所选 ${this.removeLists.length} 个商品删除？`
+    },
+    start(e,good){
+      good.startX = e.changedTouches[0].clientX
+    },
+    end(e,shopIndex,good,goodIndex){
+      let endX =  e.changedTouches[0].clientX
+      let left = '0px'
+      if(good.startX - endX > 100){
+        left='-60px'
+      }
+      if(endX - good.startX > 100){
+        left='0px'
+      }
+      Velocity(this.$refs[`goods-${shopIndex}-${goodIndex}`],{
+        left
       })
     }
   },
