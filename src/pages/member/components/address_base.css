@@ -393,7 +393,7 @@ hr.left-10 {
 }
 
 .loading {
-  background-image: url("/v2/image/loader.gif") !important;
+  background-image: url("https://b.yzcdn.cn/v2/image/loader.gif") !important;
   background-repeat: no-repeat !important;
   background-position: center center !important;
   background-size: 16px 16px
@@ -404,13 +404,13 @@ only screen and (min--moz-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3 / 2),
 only screen and (min-device-pixel-ratio: 1.5) {
   .loading {
-    background-image: url("/v2/image/loader@2x.gif") !important
+    background-image: url("https://b.yzcdn.cn/v2/image/loader@2x.gif") !important
   }
 }
 
 .with-bs-top,
 .with-bs-bottom {
-  background: url("/v2/image/wap/bottom_line.png") left top no-repeat;
+  background: url("https://b.yzcdn.cn/v2/image/wap/bottom_line.png") left top no-repeat;
   background-size: 100% 1px
 }
 
@@ -687,7 +687,7 @@ only screen and (min--moz-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3 / 2),
 only screen and (min-device-pixel-ratio: 1.5) {
   .block.block-list li span.clear {
-    background: url("/v2/image/wap/icon_clear@2x.png") center center no-repeat;
+    background: url("https://b.yzcdn.cn/v2/image/wap/icon_clear@2x.png") center center no-repeat;
     background-size: 100%
   }
 }
@@ -731,9 +731,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
   bottom: 60px;
   width: 44px;
   height: 44px;
-  background: url("/v2/image/pf/icon/gotop.png") no-repeat center center;
+  background: url("https://b.yzcdn.cn/v2/image/pf/icon/gotop.png") no-repeat center center;
   background-size: 44px;
-  z-index: 10000
+  z-index: 999
 }
 
 .go-to-top.bottom-offset {
@@ -1186,7 +1186,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   content: '';
   width: 20px;
   height: 20px;
-  background: url("/v2/image/pf/icon/loading.png") no-repeat center center;
+  background: url("https://b.yzcdn.cn/v2/image/pf/icon/loading.png") no-repeat center center;
   background-size: 20px 20px;
   -webkit-animation: rotate 2s 0s linear infinite;
   -moz-animation: rotate 2s 0s linear infinite;
@@ -1344,6 +1344,6 @@ body {
   padding: 55px 0 20px;
   font-size: 12px;
   color: #ccc;
-  background: url("/v2/image/pf/logo/wenzhou.png") no-repeat center 20px;
+  background: url("https://b.yzcdn.cn/v2/image/pf/logo/wenzhou.png") no-repeat center 20px;
   background-size: 120px
 }
