@@ -11,7 +11,12 @@ let  url ={
   cartLists: '/cart/list',
   cartReduce: '/cart/reduce',
   cartRemove: '/cart/remove',
-  cartMremove: '/cart/mremove'  // 多个删除
+  cartMremove: '/cart/mremove',  // 多个删除
+  addressLists: '/address/list',
+  addressAdd: '/address/add',
+  addressRemove: '/address/remove',
+  addressUpdate: '/address/update',
+  addressSetDefault: '/address/setDefault'
 }
 
 // 开发环境和真实上线环境的切换 只需修改下面的host即可

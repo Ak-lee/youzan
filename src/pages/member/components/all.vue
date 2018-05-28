@@ -21,12 +21,21 @@
 </template>
 
 <script>
+  import Address  from 'js/addressService.js'
+  console.log('Address')
+  console.log(Address)
   export default {
     data() {
       return {
-
+        lists:null
       }
     },
+    // created(){
+    //   Address.lists()
+    //     .then(res=>{
+    //       this.lists = res.data.lists
+    //     })
+    // },
     methods:{
       toEdit() {
         this.$router.push({
@@ -41,3 +50,4 @@
   @import './address_base.css';
   @import './address.css';
 </style>
+``
