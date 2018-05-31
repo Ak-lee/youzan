@@ -18,6 +18,11 @@ export default {
       firstTime: true
     }
   },
+  computed:{
+    lists(){
+      return this.$store.state.lists
+    }
+  },
   created(){
     let query = this.$route.query
     this.type= query.type
@@ -35,38 +40,44 @@ export default {
   methods:{
     save () {
       // 需要做合法性和非空校验
-      let {name, tel, provinceValue, cityValue, distictValue} = this
-      let data = {name, tel, provinceValue, cityValue, distictValue}
+      let {name, tel, provinceValue, cityValue, distictValue,address} = this
+      let data = {name, tel, provinceValue, cityValue, distictValue,address}
       if (this.type === 'add') {
-        Address.add(data)
-          .then(res => {
-            this.$router.go(-1)
-          })
+        this.$store.dispatch('addAction',data)
       }
       if (this.type === 'edit') {
         data.id = this.id
-        Address.update(data)
-          .then(res => {
-            this.$router.go(-1)
-          })
+        // Address.update(data)
+        //   .then(res => {
+        //     this.$router.go(-1)
+        //   })
+        this.$store.dispatch('updateAction',data)
       }
     },
     remove(){
       if(window.confirm('确认删除吗？')){
-        Address.remove(this.id)
-          .then(res => {
-            this.$router.go(-1)
-          })
+        // Address.remove(this.id)
+        //   .then(res => {
+        //     this.$router.go(-1)
+        //   })
+        this.$store.dispatch('removeAction',this.id)
       }
     },
     setDefault(){
-      Address.setDefault(this.id)
-        .then( res => {
-          this.$router.go(-1)
-        })
+      // Address.setDefault(this.id)
+      //   .then( res => {
+      //     this.$router.go(-1)
+      //   })
+      this.$store.dispatch('setDefaultAction',this.id)
     },
   },
   watch: {
+    lists:{
+      handler(){
+        this.$router.go(-1)
+      },
+      deep:true
+    },
     provinceValue(value,oldValue){
       if(value === -1){
         this.cityValue = -1
@@ -78,7 +89,7 @@ export default {
         return item.value === value
       })
       this.cityList = list[index].children
-      if(this.firstTime){
+      if(this.firstTime && this.type === 'edit'){
         this.cityValue = parseInt(this.instance.cityValue)
       }else{
         this.cityValue = -1
@@ -93,7 +104,7 @@ export default {
         return item.value === value
       })
       this.districtList = list[index].children
-      if(this.firstTime){
+      if(this.firstTime && this.type === 'edit' ){
         this.districtValue = parseInt(this.instance.districtValue)
       }else{
         this.districtValue = -1

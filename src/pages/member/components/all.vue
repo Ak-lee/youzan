@@ -35,18 +35,16 @@
 </template>
 
 <script>
-  import Address  from 'js/address_service.js'
   export default {
-    data() {
-      return {
-        lists:null
+    created(){
+      if(!this.lists){
+        this.$store.dispatch('getLists')
       }
     },
-    created(){
-      Address.list()
-        .then(res=>{
-          this.lists = res.data.lists
-        })
+    computed:{
+      lists(){
+        return this.$store.state.lists
+      }
     },
     methods:{
       toEdit(item) {
